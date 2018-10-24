@@ -72,3 +72,14 @@ def feature_engineering(df):
     
     
     return df
+	
+features = ['len_name', 'first_is_vowel', 'last_is_vowel', 'first_letter_cnt', 'last_letter_cnt', 'all_vowels_cnt', 'all_consonants_cnt']
+X = df_fe[ features ]
+y = df_fe['target']
+
+train_and_predict_model(X, X, y, y, LogisticRegression())
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=2018)
+y_train
+print("Train:", X_train.shape, y_train.shape)
+print("Test:", X_test.shape, y_test.shape)
