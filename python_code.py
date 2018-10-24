@@ -126,3 +126,21 @@ plt.show()
 train_and_predict_model(X_train, X_test, y_train, y_test, DecisionTreeClassifier())
 plt = plot_learning_curve(DecisionTreeClassifier(), "Learning Curves (Decision Tree)", X, y, ylim=(0.7, 1.02), cv=10)
 plt.show()
+
+def draw_feature_importances(model, features):
+    importances = model.feature_importances_
+    indices = np.argsort(importances)[::-1]
+
+    plt.figure(figsize=(10, 5))
+    plt.title("Feature importances")
+    plt.bar(range(X.shape[1]), model.feature_importances_[indices],
+           color="b", align="center")
+    plt.xticks(range(X.shape[1]), [ features[x] for x in indices])
+    plt.xticks(rotation=90)
+    plt.xlim([-1, X.shape[1]])
+    plt.show()
+
+model = DecisionTreeClassifier()
+model.fit(X_train, y_train)
+
+draw_feature_importances(model, features)
